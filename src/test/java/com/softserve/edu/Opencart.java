@@ -2,6 +2,9 @@ package com.softserve.edu;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.jupiter.api.*;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -11,6 +14,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.time.Duration;
+import java.util.stream.Stream;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class Opencart {
@@ -77,21 +81,31 @@ public class Opencart {
         logger.info("\t@AfterEach executed");
     }
 
-    @Test
-    public void searchMac() {
+    private static Stream<Arguments> currencyProvider() {
+        return Stream.of(
+                Arguments.of("USD", "$602.00", "mac"),
+                Arguments.of("EUR", "567.02", "mac")
+        );
+    }
+
+
+    //@Test
+    @ParameterizedTest(name = "{index} => currency={0}, expectedPrice={1}, product={2}")
+    @MethodSource("currencyProvider")
+    public void searchMac(String currency, String expectedPrice, String product) {
         logger.info("\t\t@Test searchMac() start");
         //
         // Choose Curency
         driver.findElement(By.cssSelector("form#form-currency a.dropdown-toggle")).click();
         presentationSleep(); // For Presentation ONLY
-        driver.findElement(By.cssSelector("a[href='USD']")).click();
+        driver.findElement(By.cssSelector("a[href='" + currency + "']")).click();
         presentationSleep(); // For Presentation ONLY
         //
         // Steps
         // Type Search Field
         driver.findElement(By.name("search")).click();
         driver.findElement(By.name("search")).clear();
-        driver.findElement(By.name("search")).sendKeys("mac");
+        driver.findElement(By.name("search")).sendKeys(product);
         presentationSleep(); // For Presentation ONLY
         //
         // Click Search Button
@@ -108,7 +122,7 @@ public class Opencart {
         //
         // Check
         logger.info("\t\tprice.getText() = " + price.getText());
-        Assertions.assertTrue(price.getText().contains("$602.00"));
+        Assertions.assertTrue(price.getText().contains(expectedPrice));
         presentationSleep(); // For Presentation ONLY
         //
         // Return to Previous State
