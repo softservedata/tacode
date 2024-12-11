@@ -4,7 +4,9 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -96,7 +98,20 @@ public class Opencart {
         driver.findElement(By.cssSelector("button.btn.btn-light.btn-lg")).click();
         presentationSleep(); // For Presentation ONLY
         //
-
-        //Assertions.assertEquals(4, 2 + 2);
+        WebElement price = driver.findElement(By.xpath( "//a[text()='MacBook']/../..//div/span[@class='price-new']"));
+        presentationSleep(); // For Presentation ONLY
+        //
+        // Scrolling by Action class
+        Actions action = new Actions(driver);
+        action.moveToElement(price).perform();
+        presentationSleep(2); // For Presentation ONLY
+        //
+        // Check
+        logger.info("\t\tprice.getText() = " + price.getText());
+        Assertions.assertTrue(price.getText().contains("$602.00"));
+        presentationSleep(); // For Presentation ONLY
+        //
+        // Return to Previous State
+        driver.findElement(By.cssSelector("img[alt='Your Store']")).click();
     }
 }

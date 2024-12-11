@@ -1,0 +1,129 @@
+{
+  "id": "559e1920-aa37-40be-90c4-f02a6901a0af",
+  "version": "2.0",
+  "name": "Opencart",
+  "url": "https://demo.opencart.com",
+  "tests": [{
+    "id": "da795503-9ffb-482a-8001-590245c49b8c",
+    "name": "Search",
+    "commands": [{
+      "id": "755bada8-7ade-468a-aacc-0e6d93a274eb",
+      "comment": "",
+      "command": "open",
+      "target": "/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "29a747e5-e3b5-4119-ba49-a2774afbaa35",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1295x687",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "4c794881-bf1f-4da6-a977-e97c4a96daa5",
+      "comment": "",
+      "command": "click",
+      "target": "css=.show > .d-none",
+      "targets": [
+        ["css=.show > .d-none", "css:finder"],
+        ["xpath=//form[@id='form-currency']/div/a/span", "xpath:idRelative"],
+        ["xpath=//span", "xpath:position"],
+        ["xpath=//span[contains(.,'Currency')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "beff9f3c-3f7a-4fbc-8612-df3d1bac3b9a",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=$ US Dollar",
+      "targets": [
+        ["linkText=$ US Dollar", "linkText"],
+        ["css=li:nth-child(3) > .dropdown-item", "css:finder"],
+        ["xpath=//a[contains(text(),'$ US Dollar')]", "xpath:link"],
+        ["xpath=//form[@id='form-currency']/div/ul/li[3]/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, 'USD')]", "xpath:href"],
+        ["xpath=//li[3]/a", "xpath:position"],
+        ["xpath=//a[contains(.,'$ US Dollar')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "249dffe8-dc9d-48d9-a80d-439893fc60b2",
+      "comment": "",
+      "command": "click",
+      "target": "name=search",
+      "targets": [
+        ["name=search", "name"],
+        ["css=.form-control", "css:finder"],
+        ["xpath=//input[@name='search']", "xpath:attributes"],
+        ["xpath=//div[@id='search']/input", "xpath:idRelative"],
+        ["xpath=//div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "40f06454-f846-4f9d-8df4-b04d4e6d672e",
+      "comment": "",
+      "command": "type",
+      "target": "name=search",
+      "targets": [
+        ["name=search", "name"],
+        ["css=.form-control", "css:finder"],
+        ["xpath=//input[@name='search']", "xpath:attributes"],
+        ["xpath=//div[@id='search']/input", "xpath:idRelative"],
+        ["xpath=//div/input", "xpath:position"]
+      ],
+      "value": "mac"
+    }, {
+      "id": "17426873-5133-4d28-9b1e-2573b944dade",
+      "comment": "",
+      "command": "click",
+      "target": "css=.fa-magnifying-glass",
+      "targets": [
+        ["css=.fa-magnifying-glass", "css:finder"],
+        ["xpath=//div[@id='search']/button/i", "xpath:idRelative"],
+        ["xpath=//button/i", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "81c90ff6-3dcb-4085-9dfd-9ce799b196f5",
+      "comment": "",
+      "command": "click",
+      "target": "css=.col:nth-child(2) .price",
+      "targets": [
+        ["css=.col:nth-child(2) .price", "css:finder"],
+        ["xpath=//div[@id='product-list']/div[2]/div/div[2]/div/div", "xpath:idRelative"],
+        ["xpath=//div[2]/div/div[2]/div/div", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "32029246-1ec7-4065-bec3-bd7a1795ca42",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=.col:nth-child(2) .price-new",
+      "targets": [
+        ["css=.col:nth-child(2) .price-new", "css:finder"],
+        ["xpath=//div[@id='product-list']/div[2]/div/div[2]/div/div/span", "xpath:idRelative"],
+        ["xpath=//div[2]/div/div[2]/div/div/span", "xpath:position"],
+        ["xpath=//span[contains(.,'$602.00')]", "xpath:innerText"]
+      ],
+      "value": "$602.00"
+    }, {
+      "id": "aca9def2-d97e-4d68-aff0-86e6c7b1bbc4",
+      "comment": "",
+      "command": "echo",
+      "target": "",
+      "targets": [],
+      "value": "Done"
+    }]
+  }],
+  "suites": [{
+    "id": "e6eebba8-b3c6-4a45-9ced-ca7dce2819d9",
+    "name": "Default Suite",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": ["da795503-9ffb-482a-8001-590245c49b8c"]
+  }],
+  "urls": ["https://demo.opencart.com/"],
+  "plugins": []
+}
